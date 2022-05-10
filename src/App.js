@@ -1,4 +1,3 @@
-
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Contact from './Pages/Contact/Contact';
@@ -10,6 +9,7 @@ import Appointment from './Pages/Appointment/Appointment';
 import About from './Pages/About/About';
 
 function App() {
+
   return (
     <div className="">
       <Navbar></Navbar>
@@ -20,7 +20,6 @@ function App() {
         <Route path='/review' element={<Review></Review>}></Route>
         <Route path='/appointment' element={<Appointment></Appointment>}></Route>
         <Route path='/about' element={<About></About>}></Route>
-
       </Routes>
     </div>
   );
