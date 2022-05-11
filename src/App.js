@@ -11,7 +11,7 @@ import About from './Pages/About/About';
 function App() {
 
   return (
-    <div className="">
+    <div className="max-w-7x1 px-12">
       <Navbar></Navbar>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
