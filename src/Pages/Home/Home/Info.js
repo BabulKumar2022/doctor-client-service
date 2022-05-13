@@ -8,19 +8,19 @@ const Info = () => {
   return (
     <div className="grid grid-cols-3 mt-10  gap-5 ps-12">
       <InfoCard
-        bagClass="bg-gradient-to-r from-secondary to-primary"
+        bagclassName="bg-gradient-to-r from-secondary to-primary"
         cardTitle="Opening Hours"
         cardText="9:00Am--5:00PM"
         img={clock}
       ></InfoCard>
       <InfoCard
-        bagClass="bg-accent"
+        bagclassName="bg-accent"
         cardTitle="Our Location"
         cardText="Click identify our location"
         img={marker}
       ></InfoCard>
       <InfoCard
-        bagClass="bg-gradient-to-r from-secondary to-primary"
+        bagclassName="bg-gradient-to-r from-secondary to-primary"
         cardTitle="Contact Us"
         cardText="0172000000000"
         img={phone}
