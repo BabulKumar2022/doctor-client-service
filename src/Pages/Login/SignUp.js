@@ -110,7 +110,7 @@ const SignUp = () => {
                 <input
                   type="password"
                   placeholder="Your password"
-                  class="input input-bordered w-full max-w-xs"
+                  className="input input-bordered w-full max-w-xs"
                   {...register("password", {
                     required: {
                       value: true,
