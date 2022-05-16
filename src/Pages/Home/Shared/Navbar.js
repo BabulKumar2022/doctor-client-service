@@ -9,6 +9,7 @@ const Navbar = () => {
 
   const logout =() =>{
     signOut(auth);
+    localStorage.removeItem('accessToken');
   }
   const menuItems = (
     <>
@@ -37,7 +38,7 @@ const Navbar = () => {
   );
   return (
     <div className="navbar bg-base-100 px-10">
-      <div className="navbar-center">
+      <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">
             <svg
@@ -67,7 +68,7 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
-      <div className="navbar-end lg:flex">
+      <div className="navbar-center lg:flex">
         <label tabIndex="1" for="dashboard-sidebar" className="btn btn-ghost lg:hidden">
         <svg
               xmlns="http://www.w3.org/2000/svg"
