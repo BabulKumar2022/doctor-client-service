@@ -34,6 +34,8 @@ const MyAppointment = () => {
         });
      } 
     }, [user]);
+
+
     return (
         <div>
            <h1 className='text-center my-4'>My Appointment: {appointment.length}</h1> 
