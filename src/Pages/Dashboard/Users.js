@@ -16,7 +16,7 @@ const Users = () => {
       <div class="overflow-x-auto">
         <table class="table w-full">
           {/* <!-- head --> */}
-          <thead>
+          <thead >
             <tr>
               <th></th>
               <th>Name</th>
