@@ -9,16 +9,23 @@ const Dashboard = () => {
   const [admin] = useAdmin(user);
   return (
     <div>
-      <div class="drawer drawer-mobile">
-        <input id="dashboard-sidebar" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content">
-          <h1 className="text-4xl text-purple-500 text-center">Dashboard</h1>
+      <div className="drawer drawer-mobile">
+        <input
+          id="dashboard-sidebar"
+          type="checkbox"
+          className="drawer-toggle"
+        />
+        <div className="drawer-content">
+          <h1 className="text-4xl text-purple-500 text-center">
+            {" "}
+            Admin Dashboard
+          </h1>
           <Outlet></Outlet>
           {/* !-- Page content here -- */}
         </div>
-        <div class="drawer-side">
-          <label for="dashboard-sidebar" class="drawer-overlay"></label>
-          <ul class="menu p-4 overflow-y-auto w-48 bg-base-100 text-base-content">
+        <div className="drawer-side">
+          <label for="dashboard-sidebar" className="drawer-overlay"></label>
+          <ul className="menu p-4 overflow-y-auto w-48 bg-base-100 text-base-content">
             {/* !-- Sidebar content here -- */}
             <li>
               <Link to="/dashboard">My Appointment</Link>
@@ -29,14 +36,19 @@ const Dashboard = () => {
             <li>
               <Link to="/dashboard/myHistory">My History</Link>
             </li>
-            { admin && <>
-              <li>
-              <Link to="/dashboard/users">All User</Link>
-            </li>
-              <li>
-              <Link to="/dashboard/addDoctor">Add a doctor</Link>
-            </li>
-            </>}
+            {admin && (
+              <>
+                <li>
+                  <Link to="/dashboard/users">All User</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/addDoctor">Add a doctor</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/manageDoctors">Manage doctors</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

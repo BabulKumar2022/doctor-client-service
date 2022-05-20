@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 import Loading from "../Home/Shared/Loading";
 
 const AddDoctor = () => {
@@ -8,6 +9,7 @@ const AddDoctor = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
   const { data: services, isLoading } = useQuery("services", () =>
@@ -46,18 +48,24 @@ const AddDoctor = () => {
             img: img,
           };
           // send to your database
-          fetch('http://localhost:5000/doctor', {
-            method: 'POST',
+          fetch("http://localhost:5000/doctor", {
+            method: "POST",
             headers: {
-              'content-type': 'application/json',
-              authorization: `Bearer ${localStorage.getItem('accessToken')}`
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
-            body: JSON.stringify(doctor)
+            body: JSON.stringify(doctor),
           })
-          .then((res) => res.json())
-          .then((inserted) => {
-              console.log('doctor', inserted);
-            })
+            .then((res) => res.json())
+            .then((inserted) => {
+              // console.log('doctor', inserted);
+              if (inserted.insertedId) {
+                toast.success("One doctor added successfully");
+                reset();
+              } else {
+                toast.error("failed to added doctor");
+              }
+            });
         }
       });
   };
@@ -131,7 +139,10 @@ const AddDoctor = () => {
             <label className="label">
               <span className="label-text-alt">Specialty</span>
             </label>
-            <select {...register("specialty")} class="select w-full max-w-xs">
+            <select
+              {...register("specialty")}
+              className="select w-full max-w-xs"
+            >
               {services.map((service) => (
                 <option key={service._id} value={service.name}>
                   {service.name}

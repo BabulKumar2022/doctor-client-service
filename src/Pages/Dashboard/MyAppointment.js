@@ -1,73 +1,68 @@
 import { signOut } from "firebase/auth";
-import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
-import auth from '../../firebase.init';
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
 
 const MyAppointment = () => {
-    const [appointment, setAppointment] = useState([]);
-    const [user]= useAuthState(auth);
-    const navigate = useNavigate()
+  const [appointment, setAppointment] = useState([]);
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
-
-    useEffect(() =>{
-     if(user){
-        fetch(`http://localhost:5000/booking?patient=${user.email}`, {
-        method: 'GET',
+  useEffect(() => {
+    if (user) {
+      fetch(`http://localhost:5000/booking?patient=${user.email}`, {
+        method: "GET",
         headers: {
-          'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-        }
-        })
-        .then(res => {
-          console.log('res', res);
-          if(res.status === 401 || res.status === 403){
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((res) => {
+          console.log("res", res);
+          if (res.status === 401 || res.status === 403) {
             signOut(auth);
-            localStorage.removeItem('accessToken');
+            localStorage.removeItem("accessToken");
 
-            navigate('/')
+            navigate("/");
           }
-          return res.json()
+          return res.json();
         })
-        .then(data => {
-
-          setAppointment(data)
+        .then((data) => {
+          setAppointment(data);
         });
-     } 
-    }, [user]);
+    }
+  }, [user]);
 
-
-    return (
-        <div>
-           <h1 className='text-center my-4'>My Appointment: {appointment.length}</h1> 
-           <div class="overflow-x-auto">
-  <table class="table w-full">
-    {/* <!-- head --> */}
-    <thead>
-      <tr className='text-center'>
-        <th></th>
-        <th>Name</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Treatment</th>
-      </tr>
-    </thead>
-    <tbody>
-        {
-            appointment.map(( a, index) => 
-              <tr className='text-center'>
-                <th>{index+1}</th>
+  return (
+    <div>
+      <h1 className="text-center my-4">My Appointment: {appointment.length}</h1>
+      <div className="overflow-x-auto">
+        <table className="table w-full">
+          {/* <!-- head --> */}
+          <thead>
+            <tr className="text-center">
+              <th></th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Treatment</th>
+            </tr>
+          </thead>
+          <tbody>
+            {appointment.map((a, index) => (
+              <tr className="text-center">
+                <th>{index + 1}</th>
                 <td>{a.patientName}</td>
                 <td>{a.date}</td>
                 <td>{a.slot}</td>
                 <td>{a.treatment}</td>
-              </tr>)
-        }
-      
-    </tbody>
-  </table>
-</div>
-        </div>
-    );
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
 
 export default MyAppointment;
